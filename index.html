@@ -6,13 +6,13 @@
   <title>Cybernetic Floating Watermill | Voxel Art</title>
   <style>
     :root {
-      --hud-bg: rgba(15, 23, 36, 0.68);
-      --hud-border: rgba(0, 240, 255, 0.32);
+      --hud-bg: rgba(10, 6, 32, 0.72);
+      --hud-border: rgba(0, 240, 255, 0.40);
       --accent-cyan: #00F0FF;
-      --accent-amber: #FF9100;
-      --accent-yellow: #FFD54F;
-      --text-main: #E2E8F0;
-      --text-muted: #94A3B8;
+      --accent-magenta: #FF2BD6;
+      --accent-pink: #FF7AE8;
+      --text-main: #E6E8FF;
+      --text-muted: #9C9FD8;
     }
 
     * {
@@ -26,7 +26,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: #0B192C;
+      background-color: #03010F;
       font-family: 'Inter', 'Segoe UI', 'Noto Sans JP', sans-serif;
       color: var(--text-main);
     }
@@ -113,7 +113,7 @@
     }
 
     .stat-value.warn {
-      color: var(--accent-yellow);
+      color: var(--accent-pink);
     }
 
     #hud-top-right {
@@ -126,7 +126,7 @@
 
     button {
       appearance: none;
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(26, 16, 70, 0.8);
       color: var(--text-main);
       border: 1px solid rgba(0, 240, 255, 0.35);
       border-radius: 6px;
@@ -237,17 +237,17 @@
     };
 
     const MATERIAL_DEFS = {
-      [MAT.ROCK_DARK]:     { color: 0x232733, roughness: 0.85, metalness: 0.20 },
-      [MAT.ROCK_METAL]:    { color: 0x343D4B, roughness: 0.45, metalness: 0.70 },
-      [MAT.GRASS_CYBER]:   { color: 0x1E4D48, roughness: 0.70, metalness: 0.15, emissive: 0x082622, emissiveIntensity: 0.35 },
-      [MAT.WATER]:         { color: 0x1CA3EC, roughness: 0.15, metalness: 0.10, transparent: true, opacity: 0.82 },
-      [MAT.WALL_DARK]:     { color: 0x1E242B, roughness: 0.40, metalness: 0.75 },
-      [MAT.ROOF_SLATE]:    { color: 0x2C3540, roughness: 0.50, metalness: 0.60 },
-      [MAT.WINDOW_YELLOW]: { color: 0xFFD54F, roughness: 0.20, metalness: 0.10, emissive: 0xFFD54F, emissiveIntensity: 2.2 },
-      [MAT.NEON_CYAN]:     { color: 0x00F0FF, roughness: 0.20, metalness: 0.20, emissive: 0x00F0FF, emissiveIntensity: 2.0 },
-      [MAT.NEON_AMBER]:    { color: 0xFF9100, roughness: 0.25, metalness: 0.20, emissive: 0xFF9100, emissiveIntensity: 1.8 },
-      [MAT.TREE_TRUNK]:    { color: 0x3B4252, roughness: 0.50, metalness: 0.65 },
-      [MAT.TREE_LEAF]:     { color: 0x00E676, roughness: 0.45, metalness: 0.15, emissive: 0x00E676, emissiveIntensity: 0.85 }
+      [MAT.ROCK_DARK]:     { color: 0x1B1848, roughness: 0.85, metalness: 0.20 },
+      [MAT.ROCK_METAL]:    { color: 0x3A3F7E, roughness: 0.45, metalness: 0.70 },
+      [MAT.GRASS_CYBER]:   { color: 0x0E5C70, roughness: 0.70, metalness: 0.15, emissive: 0x08405A, emissiveIntensity: 0.55 },
+      [MAT.WATER]:         { color: 0x00B4FF, roughness: 0.15, metalness: 0.10, transparent: true, opacity: 0.82 },
+      [MAT.WALL_DARK]:     { color: 0x23275A, roughness: 0.40, metalness: 0.75 },
+      [MAT.ROOF_SLATE]:    { color: 0x35307A, roughness: 0.50, metalness: 0.60 },
+      [MAT.WINDOW_YELLOW]: { color: 0xFF7AE8, roughness: 0.20, metalness: 0.10, emissive: 0xFF3FD0, emissiveIntensity: 1.3 },
+      [MAT.NEON_CYAN]:     { color: 0x00F0FF, roughness: 0.20, metalness: 0.20, emissive: 0x00E0FF, emissiveIntensity: 1.05 },
+      [MAT.NEON_AMBER]:    { color: 0xFF2BD6, roughness: 0.25, metalness: 0.20, emissive: 0xFF1FC8, emissiveIntensity: 1.1 },
+      [MAT.TREE_TRUNK]:    { color: 0x2E3478, roughness: 0.50, metalness: 0.65 },
+      [MAT.TREE_LEAF]:     { color: 0x00FF9C, roughness: 0.45, metalness: 0.15, emissive: 0x00E88A, emissiveIntensity: 0.5 }
     };
 
     // =========================================================================
@@ -255,7 +255,7 @@
     // =========================================================================
     const container = document.getElementById('canvas-container');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x2B3A67, 0.0022);
+    scene.fog = new THREE.FogExp2(0x1A0B4D, 0.0022);
 
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.5, 1000);
     const INITIAL_CAM_RADIUS = 96;
@@ -268,7 +268,7 @@
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.0;
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -292,11 +292,12 @@
     const skyMat = new THREE.ShaderMaterial({
       side: THREE.BackSide,
       depthWrite: false,
+      toneMapped: false,
       uniforms: {
-        uTopColor:     { value: new THREE.Color(0x0B192C) }, // 濃い青
-        uMidColor:     { value: new THREE.Color(0x2B3A67) }, // トワイライトブルー
-        uHorizonColor: { value: new THREE.Color(0xFF6B35) }, // 夕焼けオレンジ
-        uBottomColor:  { value: new THREE.Color(0x1A1128) }  // 下部ナイトパープル
+        uTopColor:     { value: new THREE.Color(0x03010F) }, // 天頂：ほぼ黒の藍
+        uMidColor:     { value: new THREE.Color(0x1A0B4D) }, // 中層：ディープインディゴ
+        uHorizonColor: { value: new THREE.Color(0xE0189F) }, // 地平線：ネオンマゼンタ
+        uBottomColor:  { value: new THREE.Color(0x07021A) }  // 下部：ダークバイオレット
       },
       vertexShader: `
         varying vec3 vWorldPosition;
@@ -324,8 +325,8 @@
           float h = dir.y;
           vec3 col;
           if (h >= 0.0) {
-            float t1 = smoothstep(0.0, 0.26, h);
-            float t2 = smoothstep(0.20, 0.82, h);
+            float t1 = smoothstep(0.0, 0.13, h);
+            float t2 = smoothstep(0.10, 0.70, h);
             col = mix(uHorizonColor, uMidColor, t1);
             col = mix(col, uTopColor, t2);
 
@@ -343,6 +344,7 @@
             col = mix(uHorizonColor, uBottomColor, tb);
           }
           gl_FragColor = vec4(col, 1.0);
+          #include <colorspace_fragment>
         }
       `
     });
@@ -352,10 +354,10 @@
     // =========================================================================
     // 4. LIGHTING (Sunset Key Light + Cyber Accent Point Lights)
     // =========================================================================
-    const hemiLight = new THREE.HemisphereLight(0x3A5F8A, 0xD96B27, 0.95);
+    const hemiLight = new THREE.HemisphereLight(0x2E7BFF, 0xB0239A, 0.95);
     scene.add(hemiLight);
 
-    const sunLight = new THREE.DirectionalLight(0xFF9E5E, 2.3);
+    const sunLight = new THREE.DirectionalLight(0xFF6FE0, 2.0);
     sunLight.position.set(110, 42, 65);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.width = 2048;
@@ -370,8 +372,8 @@
     sunLight.shadow.bias = -0.0005;
     scene.add(sunLight);
 
-    // 小屋の黄色い窓からの暖色光
-    const cabinLight = new THREE.PointLight(0xFFD54F, 45, 36, 1.5);
+    // 小屋の窓からのネオンピンク光
+    const cabinLight = new THREE.PointLight(0xFF4FD8, 45, 36, 1.5);
     cabinLight.position.set(-5, 6, -9);
     scene.add(cabinLight);
 
@@ -807,9 +809,9 @@
     }
 
     let wheelBlockCount = 0;
-    wheelBlockCount += addWheelInstanced(wheelMetalCoords, { color: 0x343D4B, roughness: 0.4, metalness: 0.75 });
-    wheelBlockCount += addWheelInstanced(wheelCyanCoords,  { color: 0x00F0FF, emissive: 0x00F0FF, emissiveIntensity: 2.0, roughness: 0.2 });
-    wheelBlockCount += addWheelInstanced(wheelAmberCoords, { color: 0xFF9100, emissive: 0xFF9100, emissiveIntensity: 1.6, roughness: 0.3 });
+    wheelBlockCount += addWheelInstanced(wheelMetalCoords, { color: 0x3A3F7E, roughness: 0.4, metalness: 0.75 });
+    wheelBlockCount += addWheelInstanced(wheelCyanCoords,  { color: 0x00F0FF, emissive: 0x00F0FF, emissiveIntensity: 1.05, roughness: 0.2 });
+    wheelBlockCount += addWheelInstanced(wheelAmberCoords, { color: 0xFF2BD6, emissive: 0xFF1FC8, emissiveIntensity: 1.1, roughness: 0.3 });
 
     // =========================================================================
     // 8. ANTI-GRAVITY CORE & ENERGY RINGS (UNDER ISLAND)
@@ -831,7 +833,7 @@
 
     const ring1Mesh = new THREE.InstancedMesh(
       boxGeo,
-      new THREE.MeshStandardMaterial({ color: 0x00F0FF, emissive: 0x00F0FF, emissiveIntensity: 2.0 }),
+      new THREE.MeshStandardMaterial({ color: 0x00F0FF, emissive: 0x00E0FF, emissiveIntensity: 1.05 }),
       ring1Coords.length / 3
     );
     for (let i = 0; i < ring1Coords.length / 3; i++) {
@@ -845,7 +847,7 @@
 
     const ring2Mesh = new THREE.InstancedMesh(
       boxGeo,
-      new THREE.MeshStandardMaterial({ color: 0xFF9100, emissive: 0xFF9100, emissiveIntensity: 1.7 }),
+      new THREE.MeshStandardMaterial({ color: 0xFF2BD6, emissive: 0xFF1FC8, emissiveIntensity: 1.1 }),
       ring2Coords.length / 3
     );
     for (let i = 0; i < ring2Coords.length / 3; i++) {
@@ -863,9 +865,9 @@
     // 9. WATERFALL PARTICLES (EXACTLY 300 VOXEL PARTICLES)
     // =========================================================================
     const waterfallMat = new THREE.MeshStandardMaterial({
-      color: 0x38BDF8,
-      emissive: 0x00F0FF,
-      emissiveIntensity: 0.65,
+      color: 0x00C8FF,
+      emissive: 0x00D8FF,
+      emissiveIntensity: 0.55,
       roughness: 0.15,
       transparent: true,
       opacity: 0.88
